@@ -4,13 +4,13 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware to parse JSON body
+
 app.use(express.json());
 
-// Serve static files from the 'public' directory
+
 app.use(express.static(path.join(__dirname, "public")));
 
-// Screenshot API endpoint
+
 app.post("/api/screenshot", async (req, res) => {
   try {
     const { selector } = req.body;
@@ -19,7 +19,7 @@ app.post("/api/screenshot", async (req, res) => {
       return res.status(400).json({ error: "Selector is required" });
     }
 
-    // Launch a headless browser
+
     const browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
